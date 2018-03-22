@@ -37,12 +37,18 @@ public class LList implements List //your List interface must be in same dir
 
     public void add(int i, String s) {
 	if (i < 0 || i >= _size) throw new IndexOutOfBoundsException();
-
+	LLNode input = new LLNode(s, getNode(i));
+	getNode(i-1).setNext(input);
 	
 	_size++;
     }
 
     public String remove(int i) {	
+	if (i < 0 || i >= _size) throw new IndexOutOfBoundsException();
+	getNode(i-1).setNext(getNode(i+1));
+	getNode(i).setNext(null);
+	
+
 	_size--;
 	return "";
     }
@@ -107,6 +113,19 @@ public class LList implements List //your List interface must be in same dir
 	return retStr;
     }
 
+    public LLNode getNode(int index) {
+	LLNode output;
+	LLNode tmp = _head; //create alias to head
+
+	//walk to desired node
+	for( int i=0; i < index; i++ )
+	    tmp = tmp.getNext();
+
+	//check target node's cargo hold
+	output = tmp;
+	return output;
+    }
+
 
     //main method for testing
     public static void main( String[] args )
@@ -141,6 +160,9 @@ public class LList implements List //your List interface must be in same dir
 
 	james.add(3, "good");
 	System.out.println( james);
+
+	james.remove(3);
+	System.out.println(james);
     }
 
 }//end class LList
