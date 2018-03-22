@@ -37,20 +37,35 @@ public class LList implements List //your List interface must be in same dir
 
     public void add(int i, String s) {
 	if (i < 0 || i >= _size) throw new IndexOutOfBoundsException();
+
+	//adding at index i means inserting a node with cargo s between nodes at indices i-1 and i
+
+	//make node with s as cargo, and make it point to node at index i:
 	LLNode input = new LLNode(s, getNode(i));
+
+	//make node at index i-1 point to node that was just inserted: 
 	getNode(i-1).setNext(input);
-	
+
+	//increase size:
 	_size++;
     }
 
     public String remove(int i) {	
 	if (i < 0 || i >= _size) throw new IndexOutOfBoundsException();
-	getNode(i-1).setNext(getNode(i+1));
-	getNode(i).setNext(null);
-	
 
+	//get cargo of node to be removed:
+	String retVal = getNode(i).getCargo();
+
+	//removing the node at index i means making node at index i-1 point to node at index i+1 instead of index i
+	
+        //make node at index i-1 point to node at index i+1
+	getNode(i-1).setNext(getNode(i+1));
+	
+	//decrease size:
 	_size--;
-	return "";
+
+	
+	return retVal;
     }
 
     
@@ -113,6 +128,7 @@ public class LList implements List //your List interface must be in same dir
 	return retStr;
     }
 
+    //helper method: returns node of LList at specified index
     public LLNode getNode(int index) {
 	LLNode output;
 	LLNode tmp = _head; //create alias to head
@@ -121,7 +137,7 @@ public class LList implements List //your List interface must be in same dir
 	for( int i=0; i < index; i++ )
 	    tmp = tmp.getNext();
 
-	//check target node's cargo hold
+	//reassign output to target node
 	output = tmp;
 	return output;
     }
@@ -155,14 +171,26 @@ public class LList implements List //your List interface must be in same dir
 
 	james.set( 1, "got" );
 	System.out.println( "...and now 2nd item is: " + james.set(1,"got") );
-
 	System.out.println( james );
+
+	System.out.println("\n~~~~~~~~~~~~~~~Testing add(index i, String s) and remove(index i)~~~~~~~~~~~~~\n");
 
 	james.add(3, "good");
 	System.out.println( james);
+	System.out.println("size: " + james.size());
 
-	james.remove(3);
+	System.out.println("\nCargo of node being removed: " + james.remove(1));
 	System.out.println(james);
+	System.out.println("size: " + james.size());
+
+	james.add(1, "lack");
+	System.out.println("\n" + james);
+	System.out.println("size: " + james.size());
+
+	System.out.println("\nCargo of node being removed: " + james.remove(3));
+	System.out.println(james);
+	System.out.println("size: " + james.size());
+	
     }
 
 }//end class LList
