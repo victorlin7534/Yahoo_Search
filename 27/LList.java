@@ -251,8 +251,7 @@ public class LList<T> implements List<T>
      * Adheres to specifications given by Iterator interface.
      * Uses dummy node to facilitate iterability over LList.
      *****************************************************/
-    /* YOUR MODIFIERS HERE */
-    class MyIterator implements Iterator<T> 
+    private class MyIterator implements Iterator<T> 
     {
 	private DLLNode<T> _dummy;   // dummy node to tracking pos
 	private boolean _okToRemove; // flag indicates next() was called
@@ -260,7 +259,7 @@ public class LList<T> implements List<T>
 	//constructor 
 	public MyIterator() 
 	{
-	    _dummy = _head;
+	    _dummy = new DLLNode<T>(null, null, _head);
 	    _okToRemove = false;
 	}
 
@@ -269,8 +268,7 @@ public class LList<T> implements List<T>
 	//return true if iteration has more elements.
 	public boolean hasNext() 
 	{
-	    if (_dummy == null) return false;
-	    return true;
+	    return _dummy.getNext() != null;
 	}
 
 
@@ -279,7 +277,7 @@ public class LList<T> implements List<T>
 	{
 	    if (! hasNext()) throw new NoSuchElementException();
 	    
-	    T output = _dummy.getCargo();
+	    T output = _dummy.getNext().getCargo();
 	    _dummy = _dummy.getNext();
 	    _okToRemove = true;
 	    return output;
@@ -297,28 +295,40 @@ public class LList<T> implements List<T>
 		throw new IllegalStateException("must call next() beforehand");
 	    _okToRemove = false;
 
-	    //if ________...
-	    //if (  ) {
-		
-	    //}
-	    //if ________...
-	    //else if (  ) {
-		/* "Follow your inner moonlight; don't hide the madness."
-		   -Allen Ginsberg */
-	    //}
-	    //
-	    //
-	    // Q: How many ELSE-IF's are necessary? 
+	    //if removing node of linked list of size 1, make sure _dummy doesn't point to null:
+	    if (_size == 1) {
+		_head = new DLLNode<T>(null, null, null); //empty list
+		_dummy = _head;
+		_size = 0;
+	    }
+	    
+	    //if removing first node...
+	    else if (_dummy == _head) {
+	        removeFirst();
+	    }
+
+	    //if removing last node...
+	    else if (_dummy == _tail) {
+		removeLast();
+	    }
+
+	    
+	    // Q: How many ELSE-IF's are necessary?
+	    // A: Two else-if's are necessary.
+	    
 	    // Q: What are the cases you must consider?
-	    //
-	    //      
-	    //if ________...
-	    //else {
-		/* "Follow your inner moonlight; don't hide the madness."
-		   -Allen Ginsberg */
-	    //}
+	    // A: We must consider if the size of the linked list is 1, if we are removing the first node, if we are removing the last node, and if we are removing any other node between the first and last nodes.
+	    
+	    
+	    //if removing node between first and last nodes of list...
+	    else {
+	        _dummy.getPrev().setNext(_dummy.getNext());
+		_dummy.getNext().setPrev(_dummy.getPrev());
+		_size -= 1;
+	    }
 
 	    //Q: Anything else need to be done?
+	    //A: 
 	    
       
 	}//end remove()
@@ -331,7 +341,7 @@ public class LList<T> implements List<T>
     //main method for testing
     public static void main( String[] args )
     {
-	LList james = new LList();
+	LList<String> james = new LList<String>();
 
 	System.out.println("initially: " );
 	System.out.println( james + "\tsize: " + james.size() );
@@ -379,9 +389,16 @@ public class LList<T> implements List<T>
 	Iterator<String> itr = james.iterator();
 	while (itr.hasNext()) {
 	    String str = itr.next();
-	    System.out.println(str);
+	    System.out.println("next node: " + str);
+	    /*
+	    if ((int)(Math.random()*2) == 0) {
+		System.out.println("removing node: " );
+		itr.remove();
+	    }
+	    */
 	    itr.remove();
-	    System.out.println(james);
+	    System.out.println("size: " + james.size());
+	    System.out.println(james + "\n");
 	}
 	
     }//end main()
