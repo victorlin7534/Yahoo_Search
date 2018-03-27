@@ -298,9 +298,9 @@ public class LList<T> implements List<T>
 	    _okToRemove = false;
 
 	    //if ________...
-	    if (  ) {
-	        
-	    }
+	    //if (  ) {
+		
+	    //}
 	    //if ________...
 	    //else if (  ) {
 		/* "Follow your inner moonlight; don't hide the madness."
@@ -319,6 +319,7 @@ public class LList<T> implements List<T>
 	    //}
 
 	    //Q: Anything else need to be done?
+	    
       
 	}//end remove()
 	//--------------^  Iterator interface methods  ^-------------
@@ -360,6 +361,7 @@ public class LList<T> implements List<T>
 	System.out.println( "...after add(4,phat): " );
 	System.out.println( james + "\tsize: " + james.size() );
 
+	/*
 	System.out.println( "...after remove last: " 
 			    + james.remove( james._size-1) );
 	System.out.println( james + "\tsize: " + james.size() );
@@ -372,6 +374,16 @@ public class LList<T> implements List<T>
 
 	System.out.println( "...after remove(0): " + james.remove(0) );
 	System.out.println( james + "\tsize: " + james.size() );
+	*/
+
+	Iterator<String> itr = james.iterator();
+	while (itr.hasNext()) {
+	    String str = itr.next();
+	    System.out.println(str);
+	    itr.remove();
+	    System.out.println(james);
+	}
+	
     }//end main()
 
 }//end class LList
