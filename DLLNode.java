@@ -18,7 +18,7 @@ public class DLLNode<T>
     private DLLNode<T> _nextNode, _prevNode; //pointers to next, prev DLLNodes
 
     //constructor: initializes instance vars
-    public DLLNode(DLLNode prev, T value, DLLNode next) {
+    public DLLNode(DLLNode<T> prev, T value, DLLNode<T> next) {
 	_prevNode = prev;
 	_cargo = value;
 	_nextNode = next;
@@ -27,9 +27,9 @@ public class DLLNode<T>
     //--------------v  ACCESSORS  v--------------
     public T getCargo() { return _cargo; }
 
-    public DLLNode getPrev() { return _prevNode; }
+    public DLLNode<T> getPrev() { return _prevNode; }
     
-    public DLLNode getNext() { return _nextNode; }
+    public DLLNode<T> getNext() { return _nextNode; }
     //--------------^  ACCESSORS  ^--------------
 
 
@@ -40,14 +40,14 @@ public class DLLNode<T>
 	return foo;
     }
 
-    public DLLNode setPrev( DLLNode newPrev ) {
-	DLLNode foo = getPrev();
+    public DLLNode<T> setPrev( DLLNode<T> newPrev ) {
+	DLLNode<T> foo = getPrev();
 	_nextNode = newPrev;
 	return foo;
     }
 
-    public DLLNode setNext( DLLNode newNext ) {
-	DLLNode foo = getNext();
+    public DLLNode<T> setNext( DLLNode<T> newNext ) {
+	DLLNode<T> foo = getNext();
 	_nextNode = newNext;
 	return foo;
     }

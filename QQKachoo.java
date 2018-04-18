@@ -31,7 +31,7 @@ public class QQKachoo<T> implements Deque<T> {
 	return _end.getCargo();
     }
 
-    //get methods
+     //get methods
     public T getFirst() {
 	if (_size == 0) throw new NoSuchElementException();
 	return _front.getCargo();
@@ -44,25 +44,37 @@ public class QQKachoo<T> implements Deque<T> {
 
     //poll methods
     public T pollFirst() {
-	return null;
+	if (_size == 0) return null;
+	T ans = _front.getCargo();
+	_front = _front.getNext();
+	return ans;
     }
 
     public T pollLast() {
-	return null;
+	if (_size == 0) return null;
+	T ans = _end.getCargo();
+	_end = _end.getPrev();
+	return ans;
     }
 
     //remove methods
     public T removeFirst() {
-	return null;
+        if (_size == 0) throw new NoSuchElementException();
+	T ans = _front.getCargo();
+	_front = _front.getNext();
+	return ans;
     }
 
     public T removeLast() {
-	return null;
+        if (_size == 0) throw new NoSuchElementException();
+	T ans = _end.getCargo();
+	_end = _end.getPrev();
+	return ans;
     }
 
     //offer methods
     public boolean offerFirst(T x) {
-	return false;
+	
     }
 
     public boolean offerLast(T x) {

@@ -23,7 +23,7 @@ public interface Deque<T> {
     public T pollFirst();
     public T pollLast();
     
-    //throws null if empty
+    //throws NoSuchElement exception if empty
     public T removeFirst();
     public T removeLast();
     
