@@ -12,20 +12,20 @@
  * Stores data of type String
  *****************************************************/
 
-public class DLLNode 
+public class DLLNode<T> 
 {
-    private String _cargo;    //cargo may only be of type String
-    private DLLNode _nextNode, _prevNode; //pointers to next, prev DLLNodes
+    private T _cargo;    //cargo may only be of type T
+    private DLLNode<T> _nextNode, _prevNode; //pointers to next, prev DLLNodes
 
     //constructor: initializes instance vars
-    public DLLNode(DLLNode prev, String value, DLLNode next) {
+    public DLLNode(DLLNode prev, T value, DLLNode next) {
 	_prevNode = prev;
 	_cargo = value;
 	_nextNode = next;
     }
 
     //--------------v  ACCESSORS  v--------------
-    public String getCargo() { return _cargo; }
+    public T getCargo() { return _cargo; }
 
     public DLLNode getPrev() { return _prevNode; }
     
@@ -34,8 +34,8 @@ public class DLLNode
 
 
     //--------------v  MUTATORS  v--------------
-    public String setCargo( String newCargo ) {
-	String foo = getCargo();
+    public T setCargo( T newCargo ) {
+	T foo = getCargo();
 	_cargo = newCargo;
 	return foo;
     }
@@ -60,14 +60,14 @@ public class DLLNode
     //main method for testing
     public static void main( String[] args )
     {
-	DLLNode first = new DLLNode(null, "cat", null);
+	DLLNode<String> first = new DLLNode<String>(null, "cat", null);
 
 	//Create a new node after the first
-	DLLNode second =  new DLLNode(first, "dog", null );
+	DLLNode<String> second =  new DLLNode<String>(first, "dog", null );
 	first.setNext(second);
 		      
 	//Create a third node after the second
-	DLLNode third =  new DLLNode(second, "cow", null );
+	DLLNode<String> third =  new DLLNode<String>(second, "cow", null );
 	second.setNext(third);
 
     }
