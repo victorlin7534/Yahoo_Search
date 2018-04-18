@@ -31,22 +31,12 @@ public class QQKachoo<T> implements Deque<T> {
 	return _end.getCargo();
     }
 
-     //get methods
-    public T getFirst() {
-	if (_size == 0) throw new NoSuchElementException();
-	return _front.getCargo();
-    }
-
-    public T getLast() {
-	if (_size == 0) throw new NoSuchElementException();
-	return _end.getCargo();
-    }
-
     //poll methods
     public T pollFirst() {
 	if (_size == 0) return null;
 	T ans = _front.getCargo();
 	_front = _front.getNext();
+	_size -= 1;
 	return ans;
     }
 
@@ -54,31 +44,45 @@ public class QQKachoo<T> implements Deque<T> {
 	if (_size == 0) return null;
 	T ans = _end.getCargo();
 	_end = _end.getPrev();
-	return ans;
-    }
-
-    //remove methods
-    public T removeFirst() {
-        if (_size == 0) throw new NoSuchElementException();
-	T ans = _front.getCargo();
-	_front = _front.getNext();
-	return ans;
-    }
-
-    public T removeLast() {
-        if (_size == 0) throw new NoSuchElementException();
-	T ans = _end.getCargo();
-	_end = _end.getPrev();
+	_size -= 1;
 	return ans;
     }
 
     //offer methods
     public boolean offerFirst(T x) {
+	DLLNode<T> newNode;
 	
+	if (_size == 0) {
+	    newNode = new DLLNode<T>(null, x, null);
+	    _front = newNode;
+	    _end = newNode;
+	}
+
+	else {
+	    newNode = new DLLNode<T>(null, x, _front);
+	    _front.setPrev(newNode);
+	    _front = newNode;
+	}
+	_size += 1;
+	return true;
     }
 
     public boolean offerLast(T x) {
-	return false;
+        DLLNode<T> newNode;
+	
+	if (_size == 0) {
+	    newNode = new DLLNode<T>(null, x, null);
+	    _front = newNode;
+	    _end = newNode;
+	}
+
+	else {
+	    newNode = new DLLNode<T>(_end, x, null);
+	    _end.setNext(newNode);
+	    _end = newNode;
+	}
+	_size += 1;
+	return true;
     }
 
     //add methods

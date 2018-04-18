@@ -12,21 +12,11 @@ public interface Deque<T> {
     //returns null if empty
     public T peekFirst();
     public T peekLast();
-
-    //throws NoSuchElementException if empty
-    public T getFirst();
-    public T getLast();
-
     
     //retrieves and removes first/last element of deque
     //returns null if empty
     public T pollFirst();
     public T pollLast();
-    
-    //throws NoSuchElement exception if empty
-    public T removeFirst();
-    public T removeLast();
-    
 
     //inserts specified element at front/end of deque
     //returns false if deque is full
@@ -34,8 +24,8 @@ public interface Deque<T> {
     public boolean offerLast(T x);
 
     //throws IllegalStateException if deque is full
-    public void addFirst(T x);
-    public void addLast(T x);
+    //public void addFirst(T x);
+    //public void addLast(T x);
 
     //~~~~~~~~~~~~~~~~~~~end AP subset~~~~~~~~~~~~~~~~~~~
 }
