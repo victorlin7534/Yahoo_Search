@@ -3,19 +3,19 @@
   APCS2 pd1
   HW37
   2018-04-18
- */
+*/
 
 import java.util.*;
 
 public class QQKachoo<T> implements Deque<T> {
     //instance vars
     private DLLNode<T> _front, _end;
-    private int _size;
+    public int _size;
 
     //constructor
     public QQKachoo() {
 	_front = new DLLNode<T>(null, null, null);
-	_end = new DLLNode<T>(_front, null, null);
+	_end = new DLLNode<T>(null, _front, null);
 	_front.setNext(_end);
 	_size = 0; //deque empty at birth
     }
@@ -48,40 +48,26 @@ public class QQKachoo<T> implements Deque<T> {
 	return ans;
     }
 
-    //offer methods
+    //offer methods (Q: when do we return false?)
     public boolean offerFirst(T x) {
-	DLLNode<T> newNode;
-	
-	if (_size == 0) {
-	    newNode = new DLLNode<T>(null, x, null);
-	    _front = newNode;
-	    _end = newNode;
-	}
+        _front = new DLLNode<T>(x, null, _front);
 
-	else {
-	    newNode = new DLLNode<T>(null, x, _front);
-	    _front.setPrev(newNode);
-	    _front = newNode;
-	}
-	_size += 1;
+	if ( _size == 0 ) 
+	    _end = _front;
+	else 
+	    _front.getNext().setPrev( _front );
+	_size++;
 	return true;
     }
 
     public boolean offerLast(T x) {
-        DLLNode<T> newNode;
-	
-	if (_size == 0) {
-	    newNode = new DLLNode<T>(null, x, null);
-	    _front = newNode;
-	    _end = newNode;
-	}
+        _end = new DLLNode<T>(x, _end, null);
 
-	else {
-	    newNode = new DLLNode<T>(_end, x, null);
-	    _end.setNext(newNode);
-	    _end = newNode;
-	}
-	_size += 1;
+	if ( _size == 0 ) 
+	    _front = _end;
+	else 
+	    _end.getPrev().setNext( _end );
+	_size++;
 	return true;
     }
 
@@ -93,7 +79,56 @@ public class QQKachoo<T> implements Deque<T> {
     public void addLast(T x) {
 
     }
+
+    //toString method:
+    public String toString() {
+	String s = "NULL<--";
+	DLLNode<T> tmp = _front;
+	int ctr = 0;
+	while (ctr < _size) {
+	    s += tmp.getCargo() + "<-->";
+	    tmp = tmp.getNext();
+	    ctr ++;
+	}
+	return s.substring(0, s.length()-4) + "-->NULL";
+    }
     
     public static void main(String[] args) {
+	QQKachoo<String> mister = new QQKachoo<String>();
+
+	System.out.println("\nEnqueueing deque...");
+
+	mister.offerLast("and");
+	mister.offerLast("there's");
+	mister.offerLast("nobody");
+	mister.offerLast("around");
+
+	mister.offerFirst("forest");
+	mister.offerFirst("a");
+	mister.offerFirst("in");
+	mister.offerFirst("falling");
+	mister.offerFirst("you're");
+	mister.offerFirst("when");
+	
+	System.out.println("\nDeque after enqueing: " + mister);
+	   
+	while (mister._size > 0) {
+	    int firstOrLast = (int)(Math.random() * 2); //determines whether to remove element at front or end of deque
+	    if (firstOrLast == 0) { 
+		System.out.println("\nRemoving element at FRONT of deque...");
+		System.out.println("Element at front: " + mister.peekFirst());
+		System.out.println("Element removed: " + mister.pollFirst());
+	    }
+
+	    else {
+	        System.out.println("\nRemoving element at END of deque...");
+		System.out.println("Element at end: " + mister.peekLast());
+		System.out.println("Element removed: " + mister.pollLast());
+	    }
+
+	    System.out.println("Deque after dequeue: " + mister);
+	}	   
+	/* ~~~~~~~~~~~~MOVE ME DOWN~~~~~~~~~~~~~
+	   ~~~~~~~~~~~~YOU MADE IT~~~~~~~~~~~~~~~ */
     }
 }
