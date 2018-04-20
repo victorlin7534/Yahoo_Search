@@ -66,7 +66,7 @@ public class QQKachoo<T> implements Deque<T> {
 
     //offer methods (Q: when do we return false?)
     public boolean offerFirst(T x) {
-	if(!(_capacity == -1 || _size < _capacity) { //if a capacity was set AND the deque is full...
+	if(!(_capacity == -1 || _size < _capacity)) { //if a capacity was set AND the deque is full...
 	    return false;
 	}
 	
