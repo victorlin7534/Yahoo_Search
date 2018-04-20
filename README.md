@@ -1,4 +1,4 @@
-# Team YahooSearch
+# Team Yahoo Search
 ## Members: Bing Li :mag:, Lily Yan :tennis:, Selina Zou :mortar_board:
 ## L #02: All Hands on Deque!
 
