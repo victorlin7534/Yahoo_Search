@@ -30,13 +30,17 @@ public class QQKachoo<T> implements Deque<T> {
 
     //peek methods
     public T peekFirst() {
-	if (_size == 0) return null;
-	return _front.getCargo(); 
+	if (_size != 0)
+	    return _front.getCargo();
+
+	 return null;
     }
     
     public T peekLast() {
-	if (_size == 0) return null;
-	return _end.getCargo();
+	if (_size != 0)
+	    return _end.getCargo();
+
+	return null;
     }
 
     //poll methods
@@ -50,31 +54,35 @@ public class QQKachoo<T> implements Deque<T> {
     }
 
     public T pollLast() {
-	if (_size == 0) return null;
-	T ans = _end.getCargo();
-	_end = _end.getPrev(); //removing end node
-	_size -= 1;
-	return ans;
+	if (_size != 0) {
+	    T ans = _end.getCargo();
+	    _end = _end.getPrev(); //removing end node
+	    _size -= 1;
+	    return ans;
+	} else {
+	    return null;
+	}
     }
 
     //offer methods (Q: when do we return false?)
     public boolean offerFirst(T x) {
-	if(_capacity != -1 && _size >= _capacity) { //if a capacity was set AND the deque is full...
+	if(!(_capacity == -1 || _size < _capacity) { //if a capacity was set AND the deque is full...
 	    return false;
 	}
 	
 	_front = new DLLNode<T>(x, null, _front); //making node with x as cargo and former front node as its next node
 
-	if ( _size == 0 ) 
-	    _end = _front;
-	else 
+	if ( _size != 0 )
 	    _front.getNext().setPrev( _front );
+	else 
+	    _end = _front;
+
 	_size++; //increment size
 	return true;
     }
 
     public boolean offerLast(T x) {
-	if(_capacity != -1 && _size >= _capacity) {  //if a capacity was set AND the deque is full...
+	if(!(_capacity == -1 || _size < _capacity)) {  //if a capacity was set AND the deque is full...
 	    return false;
 	}
 	
