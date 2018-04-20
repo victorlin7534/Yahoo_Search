@@ -3,12 +3,12 @@
 ## L #02: All Hands on Deque!
 
 ### To-do List
-- [x] 1. public T peekFirst()
-- [x] 2. public T peekLast();
-- [x] 3. public T pollFirst();
-- [x] 4. public T pollLast();
-- [x] 5. public boolean offerFirst(T x);
-- [x] 6. public boolean offerLast(T x);
+- [x] 1. `public T peekFirst()`
+- [x] 2. `public T peekLast();`
+- [x] 3. `public T pollFirst();`
+- [x] 4. `public T pollLast();`
+- [x] 5. `public boolean offerFirst(T x);`
+- [x] 6. `public boolean offerLast(T x);`
    
 ### Rationale For Our Method Selections
 Although there are multiple methods in the Java API to remove, add, and get desired values, we chose this particular subset because the peek(), poll() and offer() methods do not throw exceptions unlike the add, remove, and get methods. 
