@@ -1,7 +1,4 @@
-// Team Squash ( Kendrick Liang, Kayli Matsuyoshi, Lynne Wang )
-// APCS2 pd1
-// L #02: All Hands on Deque!
-// 2018-04-19r
+// Driver by Team Squash ( Kendrick Liang, Kayli Matsuyoshi, Lynne Wang )
 
 /*****************************************************
  * class DequeTester
@@ -21,13 +18,13 @@ public class DequeTester {
 	squashy.addFirst( "be" );
 	squashy.addFirst( "it" );
 	System.out.println( "squashy:" );
-	System.out.println( squashy.toString() );	
+	System.out.println( squashy );	
 	
 	System.out.println( "Testing addLast()..." );
 	squashy.addLast( "like" );
 	squashy.addLast( "that" );
 	System.out.println( "squashy:" );
-	System.out.println( squashy.toString() );
+	System.out.println( squashy );
 
 	System.out.println( "Testing peekFirst()..." );
 	System.out.println( squashy.peekFirst() ); // it
