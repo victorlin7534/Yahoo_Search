@@ -1,3 +1,5 @@
+//JungleJuice: Johnny Wong, Qian Zhou, Victor Lin
+
 public class DequeTester2{
     public static void main(String []args){
 	QQKachoo<String> test1 = new QQKachoo<String>();
